@@ -190,7 +190,7 @@ jobs:
             --no-fail-on-empty-changeset \
             --role-arn ${TESTING_CLOUDFORMATION_EXECUTION_ROLE}
 
-  integration-test::
+  integration-test:
     if: github.ref == 'refs/heads/main'
     needs: [deploy-testing]
     runs-on: ubuntu-latest

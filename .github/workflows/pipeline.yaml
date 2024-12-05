@@ -190,7 +190,7 @@ jobs:
             --no-fail-on-empty-changeset \
             --role-arn ${TESTING_CLOUDFORMATION_EXECUTION_ROLE}
 
-  integration-test:
+  integration-test::
     if: github.ref == 'refs/heads/main'
     needs: [deploy-testing]
     runs-on: ubuntu-latest
@@ -203,15 +203,7 @@ jobs:
         pip3 install -r requirements.txt 
         pip3 install -r ./tests/requirements.txt 
         # Discover and run unit tests in the 'tests/unit' directory
-        python3 -m pytest tests/integration -v    
-    if: github.ref == 'refs/heads/main'
-    needs: [deploy-testing]
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - run: |
-          # trigger the integration tests here
-
+        python3 -m pytest tests/integration -v
   deploy-prod:
     if: github.ref == 'refs/heads/main'
     needs: [integration-test]
